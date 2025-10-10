@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    background-color: #f8f9fb;
+    overflow-x: hidden;
+  }
+  
+  /* Navbar */
+  nav {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px 80px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #293d7e;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #007bff;
+  }
+  
+  
+  /* Hero Section */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    max-width: 600px;
+  }
+  
+  .hero-overlay h4 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    color: #929292;
+  }
+  
+  .hero-overlay h1 {
+    font-size: 3.2em;
+    font-weight: 700;
+    line-height: 1.2em;
+
+    margin-bottom: 25px;
+  }
+  
+  .hero-overlay button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .hero-overlay button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    nav {
+      padding: 20px 30px;
+    }
+  
+    .hero-overlay {
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      max-width: 90%;
+    }
+  
+    .hero-overlay h1 {
+      font-size: 2em;
+    }
+  
+    .nav-links {
+      display: none;
+    }
+  }
+  

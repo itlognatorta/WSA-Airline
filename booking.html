@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Flight | M&M Airline</title>
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+  <header>
+    <div class="logo">M&M Airline</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Tour</a></li>
+      <li><a href="#">Package</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </header>
+
+  <main class="booking-container">
+    <div class="booking-box">
+      <h2>Book Your Flight</h2>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="from">From</label>
+          <input type="text" id="from" name="from" placeholder="Enter departure city" required>
+        </div>
+
+        <div class="form-group">
+          <label for="to">To</label>
+          <input type="text" id="to" name="to" placeholder="Enter destination city" required>
+        </div>
+
+        <div class="form-group">
+          <label>Flight Type</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="tripType" id="roundTrip" value="round" checked>
+              Round Trip
+            </label>
+            <label>
+              <input type="radio" name="tripType" id="oneWay" value="oneway">
+              One Way
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="depart">Depart Date</label>
+            <input type="date" id="depart" required>
+          </div>
+
+          <div class="form-group" id="returnGroup">
+            <label for="return">Return Date</label>
+            <input type="date" id="return">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="passengers">Passengers</label>
+          <input type="number" id="passengers" min="1" value="1" required>
+        </div>
+
+        <button type="submit" class="search-btn">Search Flight</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
