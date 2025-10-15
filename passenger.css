@@ -1,0 +1,133 @@
+/* General Page Style */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    margin: 0;
+    padding: 30px;
+  }
+  
+  /* Passenger Section */
+  section {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 30px auto;
+  }
+  
+  /* Section Titles */
+  h2 {
+    text-align: center;
+    color: #0d47a1;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  
+  /* Passenger Input Group */
+  .passenger-input {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #f9fbff;
+    transition: 0.3s ease;
+  }
+  
+  .passenger-input:hover {
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
+  }
+  
+  .passenger-input h3 {
+    color: #1976d2;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+  
+  /* Input Fields */
+  .passenger-input input {
+    width: calc(25% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+  }
+  
+  .passenger-input input:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+    outline: none;
+  }
+  
+  /* Button Styling */
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  /* Continue Button */
+  .continue-btn {
+    background-color: #1976d2;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .continue-btn:hover {
+    background-color: #1565c0;
+    box-shadow: 0 3px 8px rgba(21, 101, 192, 0.4);
+  }
+  
+  /* Book Now Button */
+  .book-btn {
+    background-color: #28a745;
+    color: white;
+    margin-top: 15px;
+  }
+  
+  .book-btn:hover {
+    background-color: #218838;
+    box-shadow: 0 3px 8px rgba(40, 167, 69, 0.4);
+  }
+  
+  /* Summary Section */
+  #summarySection {
+    margin-top: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #bookingSummaryDetails p {
+    font-size: 1rem;
+    margin: 6px 0;
+    color: #333;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .passenger-input input {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    section {
+      padding: 20px;
+    }
+  }
+  
