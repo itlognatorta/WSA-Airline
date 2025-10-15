@@ -1,50 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Flight | M&M Airline</title>
-    <link rel="stylesheet" href="booking.css"> <!-- Reusing booking.css for header and general form styles -->
-    <link rel="stylesheet" href="flight.css"> <!-- Specific styles for flight page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Flight | M&M Airline</title>
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="flight.css">
 </head>
 <body>
-    <header>
-        <div class="logo">M&M Airline</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-           
-        </ul>
-    </header>
+  <header>
+    <div class="logo">M&M Airline</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </header>
 
-    <main class="flight-container">
-        <div class="flight-box">
-            <h2>Available Flights</h2>
-            <div id="flightSearchSummary" class="search-summary">
-                <!-- This will be populated by JavaScript with search details -->
-            </div>
+  <main class="flight-container">
+    <div class="flight-box">
+      <h2>Available Flights</h2>
 
-            <div id="flightSelection" class="flight-section">
-                <!-- Flight schedules will be loaded here by JavaScript -->
-            </div>
+      <div id="flightSearchSummary" class="search-summary">
+        <!-- Populated by JS -->
+      </div>
 
-            <div id="passengerForm" class="passenger-section hidden">
-                <h2>Passenger Information</h2>
-                <form id="passengerDetailsForm">
-                    <!-- Passenger forms will be generated here by JavaScript -->
-                    <button type="submit" class="continue-btn">Continue to Summary</button>
-                </form>
-            </div>
+      <div id="flightSelection" class="flight-section">
+        <!-- Flights loaded by JS -->
+      </div>
+    </div>
+  </main>
 
-            <div id="summarySection" class="summary-section hidden">
-                <h2>Booking Summary</h2>
-                <div id="bookingSummaryDetails">
-                    <!-- Summary details will be populated here by JavaScript -->
-                </div>
-                <button id="bookNowBtn" class="search-btn">Book Now</button>
-            </div>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

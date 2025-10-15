@@ -19,7 +19,7 @@ body {
   /* Section Titles */
   h2 {
     text-align: center;
-    color: #0d47a1;
+    color: #293d7e;
     font-size: 1.8rem;
     margin-bottom: 25px;
     font-weight: 600;
@@ -40,7 +40,7 @@ body {
   }
   
   .passenger-input h3 {
-    color: #1976d2;
+    color: #293d7e;
     margin-bottom: 15px;
     font-size: 1.2rem;
   }
