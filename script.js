@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const flightSelectionDiv = document.getElementById("flightSelection");
   const flightSummaryDiv = document.getElementById("flightSearchSummary");
-  
+
   if (flightSelectionDiv && flightSummaryDiv) {
     const availableFlights = [
       {
@@ -143,14 +143,14 @@ document.addEventListener("DOMContentLoaded", () => {
         fareType: "None"
       }
     ];
-  
+
     const searchDetails = JSON.parse(sessionStorage.getItem("searchDetails"));
-  
+
     if (!searchDetails) {
       flightSummaryDiv.innerHTML = `<p>No selected flight found. Please go back to <a href="booking.html">booking page</a>.</p>`;
       return;
     }
-  
+
     // Summary info above the flights
     flightSummaryDiv.innerHTML = `
       <p><strong>Trip:</strong> ${searchDetails.from} → ${searchDetails.to}</p>
@@ -159,21 +159,21 @@ document.addEventListener("DOMContentLoaded", () => {
       ${searchDetails.tripType === "round" ? `<p><strong>Return:</strong> ${searchDetails.returnDate}</p>` : ""}
       <p><strong>Passengers:</strong> ${searchDetails.passengers}</p>
     `;
-  
+
     // Normalize string for matching
     const norm = (s) => s.toLowerCase().trim();
-  
+
     const flightsToDisplay = availableFlights.filter(
       (f) => norm(f.from) === norm(searchDetails.from) && norm(f.to) === norm(searchDetails.to)
     );
-  
+
     if (flightsToDisplay.length === 0) {
       flightSelectionDiv.innerHTML = `<p>No flights available for your search criteria.</p>`;
       return;
     }
-  
+
     flightSelectionDiv.innerHTML = "";
-  
+
     flightsToDisplay.forEach((f) => {
       const div = document.createElement("div");
       div.classList.add("flight-card");
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       flightSelectionDiv.appendChild(div);
     });
-  
+
     // Button click logic
     flightSelectionDiv.querySelectorAll(".select-flight").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -206,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-  
 
   // =========================
   // PASSENGER PAGE
@@ -215,18 +214,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const summarySection = document.getElementById("summarySection");
   const bookingSummaryDetails = document.getElementById("bookingSummaryDetails");
   const bookNowBtn = document.getElementById("bookNowBtn");
-  
+
   if (passengerForm) {
     const flightData = JSON.parse(sessionStorage.getItem("selectedFlights"));
     if (!flightData) {
       passengerForm.innerHTML = `<p>No flight selected. Please go back to <a href="flight.html">flight page</a>.</p>`;
       return;
     }
-  
+
     const { searchDetails, selectedOutboundFlight } = flightData;
     const passengerCount = parseInt(searchDetails.passengers);
-  
-    // ✅ Generate passenger input fields
+
+    // ✅ Generate passenger input fields with error placeholders
     for (let i = 1; i <= passengerCount; i++) {
       const wrapper = document.createElement("div");
       wrapper.classList.add("passenger-input");
@@ -235,54 +234,103 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="text" id="fname${i}" placeholder="First Name" required>
         <input type="text" id="lname${i}" placeholder="Last Name" required>
         <input type="email" id="email${i}" placeholder="Email" required>
-        <input type="tel" id="phone${i}" placeholder="Phone (09xxxxxxxxx)" required pattern="^09\\d{9}$">
+        <small id="emailError${i}" class="error-message"></small>
+        <input type="tel" id="phone${i}" placeholder="Phone (09xxxxxxxxx)" required>
+        <small id="phoneError${i}" class="error-message"></small>
       `;
       passengerForm.appendChild(wrapper);
     }
-  
-    // ✅ Add "Continue to Summary" button
+
+    // ✅ Continue to Summary button
     const submitBtn = document.createElement("button");
     submitBtn.textContent = "Continue to Summary";
     submitBtn.type = "submit";
     passengerForm.appendChild(submitBtn);
-  
-    // ✅ When user submits passenger info
-    passengerForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-  
+
+    // ✅ Validation & submit handler for passenger form
+    passengerForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // stop form submission
+
+      let allValid = true; // flag to check if all fields are valid
+
+      for (let i = 1; i <= passengerCount; i++) {
+        const fnameInput = document.getElementById(`fname${i}`);
+        const lnameInput = document.getElementById(`lname${i}`);
+        const emailInput = document.getElementById(`email${i}`);
+        const phoneInput = document.getElementById(`phone${i}`);
+        const emailError = document.getElementById(`emailError${i}`);
+        const phoneError = document.getElementById(`phoneError${i}`);
+
+        // Clear previous errors
+        emailError.textContent = "";
+        phoneError.textContent = "";
+        emailInput.style.borderColor = "";
+        phoneInput.style.borderColor = "";
+
+        const firstName = fnameInput.value.trim();
+        const lastName = lnameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        const phonePattern = /^09\d{9}$/;
+
+        // Basic required checks
+        if (!firstName || !lastName) {
+          // mark invalid (you can show messages if desired)
+          allValid = false;
+          if (!firstName) fnameInput.style.borderColor = "red";
+          if (!lastName) lnameInput.style.borderColor = "red";
+        }
+
+        // Validate email
+        if (!emailPattern.test(email)) {
+          emailError.textContent = "Please enter a valid Gmail address (e.g. example@gmail.com)";
+          emailInput.style.borderColor = "red";
+          allValid = false;
+        }
+
+        // Validate phone
+        if (!phonePattern.test(phone)) {
+          phoneError.textContent = "Phone must start with 09 and contain exactly 11 digits";
+          phoneInput.style.borderColor = "red";
+          allValid = false;
+        }
+      }
+
+      if (!allValid) {
+        // stay on passenger form if invalid
+        return;
+      }
+
+      // If all valid, build passengers array and show summary
       const passengers = [];
       for (let i = 1; i <= passengerCount; i++) {
         const firstName = document.getElementById(`fname${i}`).value.trim();
         const lastName = document.getElementById(`lname${i}`).value.trim();
         const email = document.getElementById(`email${i}`).value.trim();
         const phone = document.getElementById(`phone${i}`).value.trim();
-  
-        if (!firstName || !lastName || !email || !phone) {
-          alert(`Please complete all fields for Passenger ${i}.`);
-          return;
-        }
-  
         passengers.push({ firstName, lastName, email, phone });
       }
-  
+
       summarySection.classList.remove("hidden");
       passengerForm.classList.add("hidden");
-  
+
       // ✅ Compute total fare
       const totalFare = selectedOutboundFlight.price * passengerCount;
-  
+
       // ✅ Build Passenger & Flight Summary
       let passengerDetailsHTML = "";
-      passengers.forEach((p, i) => {
+      passengers.forEach((p, idx) => {
         passengerDetailsHTML += `
           <div class="passenger-info">
-            <p><strong>Passenger ${i + 1}:</strong> ${p.firstName} ${p.lastName}</p>
+            <p><strong>Passenger ${idx + 1}:</strong> ${p.firstName} ${p.lastName}</p>
             <p><strong>Email:</strong> ${p.email}</p>
             <p><strong>Phone:</strong> ${p.phone}</p>
           </div>
         `;
       });
-  
+
       bookingSummaryDetails.innerHTML = `
         <h3>Flight Information</h3>
         <div class="summary-flight-details">
@@ -295,15 +343,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Duration:</strong> ${selectedOutboundFlight.duration || "N/A"}</p>
           <p><strong>Price per Passenger:</strong> ₱${selectedOutboundFlight.price.toLocaleString()}</p>
         </div>
-  
+
         <h3>Passenger Details (${passengerCount})</h3>
         ${passengerDetailsHTML}
-  
+
         <h3>Total Fare</h3>
         <p><strong>Passengers:</strong> ${passengerCount}</p>
         <p><strong>Total:</strong> ₱${totalFare.toLocaleString()}</p>
       `;
-  
+
       // ✅ Book Now button
       if (bookNowBtn) {
         bookNowBtn.onclick = (e) => {
@@ -315,4 +363,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-}); 
+});
